@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8"><title>Sign up</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="min-h-screen flex items-center justify-center bg-gray-50">
+  <div class="w-full max-w-md bg-white p-6 rounded-2xl shadow">
+    <h1 class="text-2xl font-semibold mb-4">Create your account</h1>
+
+    <form method="post" class="space-y-3">
+      {% csrf_token %}
+      {{ form.non_field_errors }}
+      <div>
+        <label class="block text-sm mb-1">Username</label>
+        {{ form.username }}
+        {{ form.username.errors }}
+      </div>
+      <div>
+        <label class="block text-sm mb-1">Email</label>
+        {{ form.email }}
+        {{ form.email.errors }}
+      </div>
+      <div class="grid grid-cols-2 gap-3">
+        <div>
+          <label class="block text-sm mb-1">Password</label>
+          {{ form.password1 }}
+          {{ form.password1.errors }}
+        </div>
+        <div>
+          <label class="block text-sm mb-1">Confirm Password</label>
+          {{ form.password2 }}
+          {{ form.password2.errors }}
+        </div>
+      </div>
+      <div class="grid grid-cols-2 gap-3">
+        <div>
+          <label class="block text-sm mb-1">Date of birth (YYYY-MM-DD)</label>
+          {{ form.dob }}
+          {{ form.dob.errors }}
+        </div>
+        <div>
+          <label class="block text-sm mb-1">Parent/Guardian email (if under 16)</label>
+          {{ form.parent_email }}
+          {{ form.parent_email.errors }}
+        </div>
+      </div>
+
+      <hr class="my-2">
+
+      <div class="flex items-center gap-2">
+        {{ form.is_teacher }} <label>I'm a teacher</label>
+      </div>
+      <div>
+        <label class="block text-sm mb-1">Teacher invite code</label>
+        {{ form.invite_code }}
+        <p class="text-xs text-gray-500">Leave blank if you're a student.</p>
+        {{ form.invite_code.errors }}
+      </div>
+
+      <div class="flex items-center gap-2">
+        {{ form.agree }} <label>I agree to the Terms & Privacy</label>
+      </div>
+      {{ form.agree.errors }}
+
+      <button class="w-full py-2 rounded bg-black text-white">Sign up</button>
+    </form>
+
+    <p class="text-sm mt-3">
+      Already have an account? <a class="underline" href="/">Sign in</a>
+    </p>
+  </div>
+</body>
+</html>

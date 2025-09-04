@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8"><title>Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="p-6">
+  <div class="flex justify-between items-center">
+    <h1 class="text-2xl font-semibold">Dashboard</h1>
+    <div class="flex gap-4 items-center">
+      {% if is_teacher %}
+        <a href="{% url 'teacher_dashboard' %}" class="text-sm underline">Teacher dashboard</a>
+      {% endif %}
+      <a href="{% url 'choose_subjects' %}" class="px-3 py-2 rounded bg-gray-900 text-white">Choose Subjects</a>
+      <a href="{% url 'student_tasks' %}" class="text-sm underline">My tasks</a>
+      <a href="{% url 'logout' %}" class="text-sm underline">Logout</a>
+    </div>
+  </div>
+
+  <h2 class="text-xl mt-6 mb-2">My Subjects</h2>
+  <ul class="list-disc pl-6">
+    {% for s in my_subjects %}
+      <li>{{ s.name }}</li>
+    {% empty %}
+      <li>No subjects yet. Click “Choose Subjects”.</li>
+    {% endfor %}
+  </ul>
+
+  <h2 class="text-xl mt-8 mb-3">My Bookings</h2>
+  <div class="grid gap-3">
+    {% for b in my_bookings %}
+      <div class="border rounded p-3">
+        <div class="flex justify-between">
+          <div class="font-medium">{{ b.subject.name }} with {{ b.teacher.username }}</div>
+          {% comment %} status badge {% endcomment %}
+          {% if b.status == 'approved' %}
+            <span class="text-xs px-2 py-1 rounded bg-green-100 text-green-800">approved</span>
+          {% elif b.status == 'pending' %}
+            <span class="text-xs px-2 py-1 rounded bg-amber-100 text-amber-800">pending</span>
+          {% elif b.status == 'rejected' %}
+            <span class="text-xs px-2 py-1 rounded bg-red-100 text-red-800">rejected</span>
+          {% elif b.status == 'cancelled' %}
+            <span class="text-xs px-2 py-1 rounded bg-gray-200 text-gray-800">cancelled</span>
+          {% elif b.status == 'completed' %}
+            <span class="text-xs px-2 py-1 rounded bg-blue-100 text-blue-800">completed</span>
+          {% endif %}
+        </div>
+        <div class="text-sm text-gray-600">
+          {{ b.start_datetime }} → {{ b.end_datetime }}
+        </div>
+      </div>
+    {% empty %}
+      <div class="text-sm text-gray-600">No bookings yet.</div>
+    {% endfor %}
+  </div>
+</body>
+</html>

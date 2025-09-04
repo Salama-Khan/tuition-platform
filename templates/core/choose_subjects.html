@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head><meta charset="utf-8"><title>Choose Subjects</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="p-6">
+    <h1 class="text-2xl font-semibold mb-4">Choose Your Subjects</h1>
+    <form method="post" class="space-y-3">
+      {% csrf_token %}
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+        {% for s in subjects %}
+          <label class="border rounded p-3 flex gap-2 items-center">
+            <input type="checkbox" name="subjects" value="{{ s.id }}">
+            <span>{{ s.name }}</span>
+          </label>
+        {% endfor %}
+      </div>
+      <button class="px-4 py-2 rounded bg-black text-white">Save</button>
+    </form>
+  </body>
+</html>
