@@ -90,17 +90,18 @@ WSGI_APPLICATION = 'tuition_project.wsgi.application'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
 import dj_database_url
-if os.getenv("DATABASE_URL"):
-    DATABASES = {
-        "default": dj_database_url.parse(os.environ["DATABASE_URL"], conn_max_age=600, ssl_require=True)
+import os
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'postgres',         # The "Initial database name" you typed earlier
+        'USER': 'postgres',          # The "Master username" (usually postgres)
+        'PASSWORD': 'Asda1298.', # The password you wrote down earlier!
+        'HOST': 'epl-tutors-db.cbg0ek00c38s.eu-north-1.rds.amazonaws.com', # e.g. epl-tutors.xxxx.rds.amazonaws.com
+        'PORT': '5432',
     }
-else:
-    DATABASES = {
-        "default": {
-            "ENGINE": "django.db.backends.sqlite3",
-            "NAME": BASE_DIR / "db.sqlite3",
-        }
-    }
+}
 
 
 # Password validation
