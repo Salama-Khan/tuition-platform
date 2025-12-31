@@ -98,7 +98,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'postgres',         # The "Initial database name" you typed earlier
         'USER': 'postgres',          # The "Master username" (usually postgres)
-        'PASSWORD': 'Asda1298.', # The password you wrote down earlier!
+        'PASSWORD': os.getenv('DB_PASSWORD'), # The password you wrote down earlier!
         'HOST': 'epl-tutors-db.cbg0ek00c38s.eu-north-1.rds.amazonaws.com', # e.g. epl-tutors.xxxx.rds.amazonaws.com
         'PORT': '5432',
     }
