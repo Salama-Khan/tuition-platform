@@ -17,7 +17,13 @@ load_dotenv()
 TEACHER_INVITE_CODE = os.getenv("TEACHER_INVITE_CODE", "")
 SECRET_KEY = os.getenv("SECRET_KEY", "dev-insecure-key")  # must be set in Azure
 DEBUG = os.getenv("DEBUG", "False").lower() == "true"
-ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "*").split(",")
+ALLOWED_HOSTS = [
+    'epltutors.com',
+    'www.epltutors.com',
+    'epl-tutors-env.eba-keqbp2cy.eu-north-1.elasticbeanstalk.com',  # Your AWS address (Keep as backup)
+    'localhost',
+    '127.0.0.1'
+]
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
